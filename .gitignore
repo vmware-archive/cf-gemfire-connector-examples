@@ -1,7 +1,9 @@
 *.iml
 *.DS_Store
 *\.idea
-*\.gradle
+*.gradle/
 *.iws
 *.ipr
-*build*
+java-app-spring-cloud/build/
+java-app/build/
+spring-app/build/
