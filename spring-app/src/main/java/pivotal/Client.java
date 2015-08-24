@@ -25,17 +25,17 @@ import java.io.IOException;
 @RestController
 public class Client {
 
-    @Resource(name = "example")
+    @Resource(name = "test")
     Region myRegion;
 
     @Autowired
-    @Bean(name = "example")
-    public ClientRegionFactoryBean<Integer, String> exampleLocalRegion(ClientCache cache) {
-        ClientRegionFactoryBean<Integer, String> exampleRegion = new ClientRegionFactoryBean<>();
-        exampleRegion.setName("example");
-        exampleRegion.setCache(cache);
-        exampleRegion.setShortcut(ClientRegionShortcut.PROXY);
-        return exampleRegion;
+    @Bean(name = "test")
+    public ClientRegionFactoryBean<Integer, String> testLocalRegion(ClientCache cache) {
+        ClientRegionFactoryBean<Integer, String> testRegion = new ClientRegionFactoryBean<>();
+        testRegion.setName("test");
+        testRegion.setCache(cache);
+        testRegion.setShortcut(ClientRegionShortcut.PROXY);
+        return testRegion;
     }
 
     @RequestMapping("/dotest")
