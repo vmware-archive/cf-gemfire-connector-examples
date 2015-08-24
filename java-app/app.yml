@@ -1,0 +1,7 @@
+---
+applications:
+- name: j_app 
+  path: build/libs/java-app-1.0-SNAPSHOT.jar 
+  no-route: true
+  services:
+  - MyService 

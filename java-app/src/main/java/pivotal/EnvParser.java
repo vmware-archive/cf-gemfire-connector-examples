@@ -1,7 +1,5 @@
 package pivotal;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -41,6 +39,9 @@ public class EnvParser {
     List<String> locators = (List<String>) credentials.get("locators");
     for (String locator : locators) {
       Matcher m = p.matcher(locator);
+      if (!m.matches()) {
+        throw new IllegalStateException("Unexpected locator format. expected host[port], got"+locator);
+      }
       locatorList.add(new URI("locator://" + m.group(1) + ":" + m.group(2)));
     }
     return locatorList;

@@ -1,7 +1,9 @@
 package pivotal;
 
+import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.client.ClientCache;
 import com.gemstone.gemfire.cache.client.ClientCacheFactory;
+import com.gemstone.gemfire.cache.client.ClientRegionShortcut;
 
 import java.io.IOException;
 import java.net.URI;
@@ -23,8 +25,18 @@ public class MyJavaApplication {
         ccf.addPoolLocator(locator.getHost(), locator.getPort());
       }
       ClientCache client = ccf.create();
+      Region r = client.createClientRegionFactory(ClientRegionShortcut.PROXY).create("test");
+      r.put("1", "one");
+      if (!r.get("1").equals("one")) {
+        throw new RuntimeException("Expected value to be \"one\", but was:"+r.get("1"));
+      }
     } catch (IOException | URISyntaxException e) {
       throw new RuntimeException("Could not deploy Application", e);
+    }
+    try {
+      Thread.sleep(Long.MAX_VALUE);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
   }
 }
