@@ -15,7 +15,7 @@ Following are the common steps for all examples to create a GemFire Service and 
 - install the gemfire plugin for the `cf` command
 - create a region named "test"
   - connect `gfsh` to the service instance
-    `cf show-gfsh MyService` will print the command to run in gfsh to connect to the cluster (install GemFire cf plugin from [Pivotal Network|http://network.pivotal.io])
+    `cf show-gfsh MyService` will print the command to run in gfsh to connect to the cluster (install GemFire cf plugin from [Pivotal Network](http://network.pivotal.io)
   - `gfsh>create region --name=test --type=PARTITION` will create a region named "test"
 
 Clone this repo, then build all examples with:
