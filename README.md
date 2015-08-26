@@ -15,21 +15,28 @@ Following are the common steps for all examples to create a GemFire Service and 
 - install the gemfire plugin for the `cf` command
 - create a region named "test"
   - connect `gfsh` to the service instance
-    `cf show-gfsh MyService` will print the command to run in gfsh to connect to the cluster
+    `cf show-gfsh MyService` will print the command to run in gfsh to connect to the cluster (install GemFire cf plugin from [Pivotal Network|http://network.pivotal.io])
   - `gfsh>create region --name=test --type=PARTITION` will create a region named "test"
+
+Clone this repo, then build all examples with:
+```
+$ ./gradlew build
+```
+
+To deploy individual application to cloudfoundry:
+1. cd to the project dir
+1. `$ cf push -f app.yml`
 
 ## Java main application
 
-application name: java-app
-This application uses jackson to parse the environment variable in the EnvParser class. ClientAuthInitialize is an implementation of AuthInitialize that is used for handling client authenticatin. The main class, MyJavaApplication creates a ClientCache that uses the ClientAuthInitialize for authentication and uses EnvParser to get the locator information.
+application name: `java-app`
 
-To deploy the application:
-- deploy the application to cloud foundry using the command
-  `cf push -f app.yml`
+This application uses jackson to parse the environment variable in the EnvParser class. ClientAuthInitialize is an implementation of AuthInitialize that is used for handling client authenticatin. The main class, MyJavaApplication creates a ClientCache that uses the ClientAuthInitialize for authentication and uses EnvParser to get the locator information.
 
 ## Java main application using spring cloud connector
 
-application name: java-app-spring-cloud
+application name: `java-app-spring-cloud`
+
 To use the spring connector, your application does *not* have to be spring application. Just specify spring-cloud-core and spring-cloud-gemfire-cloudfoundry-connector as your project dependencies and let the connector parse the VCAP_SERVICES environment variable for you. In the application you can get ServiceInfo like so:
 
 ```
@@ -41,5 +48,7 @@ You will still need to provide an implementation of AuthInitialize like in the p
 
 ## Spring Application
 
+application name: `spring-app`
 
+If you use spring, you can just Autowire ClientCache into your application.
 
