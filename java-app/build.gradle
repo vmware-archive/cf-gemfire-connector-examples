@@ -21,11 +21,7 @@ repositories {
     }
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'pivotal.MyJavaApplication'
-    }
-}
+tasks.jar.dependsOn(shadowJar)
 
 shadowJar {
     mergeServiceFiles()

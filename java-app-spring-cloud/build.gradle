@@ -7,9 +7,12 @@ group 'io.pivotal'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'idea'
 
 sourceCompatibility = 1.7
+
+mainClassName = 'io.pivotal.JavaAppSpringCloud'
 
 repositories {
     mavenCentral()
@@ -21,11 +24,7 @@ repositories {
     }
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'io.pivotal.JavaAppSpringCloud'
-    }
-}
+tasks.jar.dependsOn(shadowJar)
 
 shadowJar {
   mergeServiceFiles()
