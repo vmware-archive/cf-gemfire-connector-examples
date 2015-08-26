@@ -1,7 +1,9 @@
 package io.pivotal;
 
+import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.client.ClientCache;
 import com.gemstone.gemfire.cache.client.ClientCacheFactory;
+import com.gemstone.gemfire.cache.client.ClientRegionShortcut;
 import io.pivotal.spring.cloud.service.common.GemfireServiceInfo;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
@@ -24,6 +26,16 @@ public class JavaAppSpringCloud {
     for (URI locator : locators) {
       ccf.addPoolLocator(locator.getHost(), locator.getPort());
     }
-    ClientCache cache = ccf.create();
+    ClientCache client = ccf.create();
+    Region r = client.createClientRegionFactory(ClientRegionShortcut.PROXY).create("test");
+    r.put("1", "one");
+    if (!r.get("1").equals("one")) {
+      throw new RuntimeException("Expected value to be \"one\", but was:"+r.get("1"));
+    }
+    try {
+      Thread.sleep(Long.MAX_VALUE);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }
