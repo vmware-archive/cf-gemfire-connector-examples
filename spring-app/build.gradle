@@ -28,11 +28,7 @@ repositories {
     maven {
         url "http://repo.spring.io/libs-release/"
     }
-    maven {
-        url "http://repo.spring.io/libs-snapshot-local"
-    }
 }
-
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE")
