@@ -1,3 +1,8 @@
+plugins {
+  id 'java'
+  id 'com.github.johnrengelman.shadow' version '1.2.2'
+}
+
 group 'io.pivotal'
 version '1.0-SNAPSHOT'
 
@@ -17,14 +22,13 @@ repositories {
 }
 
 jar {
-    from {
-        (configurations.runtime).collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
     manifest {
         attributes 'Main-Class': 'pivotal.MyJavaApplication'
     }
+}
+
+shadowJar {
+    mergeServiceFiles()
 }
 
 dependencies {
