@@ -1,0 +1,6 @@
+---
+applications:
+- name: spring_app 
+  path: build/libs/spring-app-1.0.jar
+  services:
+  - MyService 
