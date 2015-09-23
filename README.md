@@ -4,10 +4,11 @@ Example applications that use the GemFire on Pivotal Cloud Foundry service.
 
 For an application to connect to a provisioned GemFire cluster in Cloud Foundry, it has to create a GemFire ClientCache which connects to the GemFire locators. The application also has to provide an implementation of AuthInitialize which will send the client credentials to the server. The credentials and the locator information is present in the VCAP_SERVICES environment variable. This repository has three examples of how these environment variables can be parsed.
 
-There are 3 example applications in this repository:
+There are 4 example applications in this repository:
 - Java main application
 - Java main application using spring cloud connectors
 - Spring boot application using spring cloud connectors
+- Spring boot application using spring cloud connectors with custom GemFire client configuration
 
 Following are the common steps for all examples to create a GemFire Service and create a Region:
 - create a GemFire service instance named "MyService"
@@ -50,5 +51,10 @@ You will still need to provide an implementation of AuthInitialize like in the p
 
 application name: `spring-app`
 
-If you use spring, you can just Autowire ClientCache into your application.
+If you use Spring, you can just `Autowire` ClientCache into your application.
 
+## Spring Application with custom GemFire client configuration
+
+application name: `spring-app-client-config`
+
+If the ClientCache requires additional configuration then the Cache needs to be explictly created using a `ServiceConnectorConfig`. The application needs to create a `CacheClient` bean using the CloudFactory.

@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+     dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.2.RELEASE"
+        classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+    }
+}
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.7
+mainClassName = "pivotal.SDGApp"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "http://dist.gemstone.com/maven/release"
+    }
+    maven {
+        url "http://repo.springsource.org/simple/ext-release-local"
+    }
+    maven {
+        url "http://repo.spring.io/libs-release/"
+    }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE")
+    compile("com.gemstone.gemfire:gemfire:8.1.0")
+    compile("io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:1.0.0.RELEASE")
+    compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:1.0.1.SNAPSHOT")
+    compile("org.springframework.data:spring-data-gemfire:1.6.1.RELEASE")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
