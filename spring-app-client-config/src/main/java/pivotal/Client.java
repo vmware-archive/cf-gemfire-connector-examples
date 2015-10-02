@@ -1,6 +1,8 @@
 package pivotal;
 
+import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.client.ClientCache;
+import com.gemstone.gemfire.cache.client.ClientRegionShortcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,17 @@ public class Client {
     @Autowired
     @Qualifier("my-client-cache")
     ClientCache cache;
+
+    @RequestMapping("/dotest")
+    public String doTest() {
+        Region myRegion = cache.createClientRegionFactory(ClientRegionShortcut.PROXY).create("test");
+        myRegion.put(1, "one");
+        Object val = myRegion.get(1);
+        if (!"one".equals(val)) {
+            throw new IllegalStateException("Expected value not returned, expected: one, found:" + val);
+        }
+        return "ok";
+    }
 
     @RequestMapping("/poolIdleTimeout")
     public Long getClientPoolIdleTimeout() {
