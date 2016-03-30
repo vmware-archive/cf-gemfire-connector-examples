@@ -11,12 +11,12 @@ There are 4 example applications in this repository:
 - Spring boot application using spring cloud connectors with custom GemFire client configuration
 
 Following are the common steps for all examples to create a GemFire Service and create a Region:
-- create a GemFire service instance named "MyService"
-  `cf create-service p-gemfire GemFireServicePlan1 MyService`
+- create a GemFire service instance named "service0"
+  `cf create-service p-gemfire GemFireServicePlan1 service0`
 - install the gemfire plugin for the `cf` command
 - create a region named "test"
   - connect `gfsh` to the service instance
-    `cf show-gfsh MyService` will print the command to run in gfsh to connect to the cluster (install GemFire cf plugin from [Pivotal Network](http://network.pivotal.io)
+    `cf show-gfsh service0` will print the command to run in gfsh to connect to the cluster (install GemFire cf plugin from [Pivotal Network](http://network.pivotal.io)
   - `gfsh>create region --name=test --type=PARTITION` will create a region named "test"
 
 Clone this repo, then build all examples with:
@@ -43,7 +43,7 @@ To use the spring connector, your application does *not* have to be spring appli
 ```
     CloudFactory cloudFactory = new CloudFactory();
     Cloud cloud = cloudFactory.getCloud();
-    GemfireServiceInfo myService = (GemfireServiceInfo) cloud.getServiceInfo("MyService");
+    GemfireServiceInfo myService = (GemfireServiceInfo) cloud.getServiceInfo("service0");
 ```
 You will still need to provide an implementation of AuthInitialize like in the previous example. Please refer to the application.
 

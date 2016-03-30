@@ -18,7 +18,7 @@ public class JavaAppSpringCloud {
   public static void main(String[] args) {
     CloudFactory cloudFactory = new CloudFactory();
     Cloud cloud = cloudFactory.getCloud();
-    GemfireServiceInfo myService = (GemfireServiceInfo) cloud.getServiceInfo("MyService");
+    GemfireServiceInfo myService = (GemfireServiceInfo) cloud.getServiceInfo("service0");
     Properties props = new Properties();
     props.setProperty("security-client-auth-init", "io.pivotal.ClientAuthInitialize.create");
     ClientCacheFactory ccf = new ClientCacheFactory(props);

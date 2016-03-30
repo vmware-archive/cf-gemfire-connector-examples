@@ -1,7 +1,8 @@
 ---
 applications:
-- name: j_s_app 
+- name: j_s_app
   path: build/libs/java-app-spring-cloud-1.0-SNAPSHOT-all.jar
   no-route: true
+  health-check-type: none
   services:
-  - MyService 
+  - service0

@@ -23,7 +23,7 @@ public class ClientAuthInitialize implements AuthInitialize {
   private ClientAuthInitialize() {
     CloudFactory cloudFactory = new CloudFactory();
     Cloud cloud = cloudFactory.getCloud();
-    serviceInfo = (GemfireServiceInfo) cloud.getServiceInfo("MyService");
+    serviceInfo = (GemfireServiceInfo) cloud.getServiceInfo("service0");
   }
 
   public static AuthInitialize create() {
