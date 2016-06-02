@@ -3,4 +3,4 @@ applications:
 - name: spring_app
   path: build/libs/spring-app-client-config-1.0.jar
   services:
-  - service0 
+  - service0
