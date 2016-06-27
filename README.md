@@ -26,7 +26,7 @@ $ ./gradlew build
 
 To deploy individual application to cloudfoundry:
 1. cd to the project dir
-1. `$ cf push -f app.yml`
+1. `$ cf push`
 
 ## Java main application
 
