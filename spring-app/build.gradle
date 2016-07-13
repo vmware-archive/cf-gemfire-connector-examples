@@ -32,7 +32,7 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE")
-    compile("com.gemstone.gemfire:gemfire:8.1.0")
+    compile("com.gemstone.gemfire:gemfire:8.2.1")
     compile("io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:1.0.0.RELEASE")
     compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:1.0.0.RELEASE")
     compile("org.springframework.data:spring-data-gemfire:1.6.1.RELEASE")

@@ -31,7 +31,7 @@ shadowJar {
 }
 
 dependencies {
-    compile("com.gemstone.gemfire:gemfire:8.1.0")
+    compile("com.gemstone.gemfire:gemfire:8.2.1")
     compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:1.0.0.RELEASE")
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
