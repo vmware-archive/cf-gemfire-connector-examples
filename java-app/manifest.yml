@@ -4,5 +4,3 @@ applications:
   path: build/libs/java-app-1.0-SNAPSHOT-all.jar
   no-route: true
   health-check-type: none
-  services:
-  - service0
