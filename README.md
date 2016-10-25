@@ -2,13 +2,14 @@
 
 Example applications that use the GemFire on Pivotal Cloud Foundry service.
 
-For an application to connect to a provisioned GemFire cluster in Cloud Foundry, it has to create a GemFire ClientCache which connects to the GemFire locators. The application also has to provide an implementation of AuthInitialize which will send the client credentials to the server. The credentials and the locator information is present in the VCAP_SERVICES environment variable. This repository has three examples of how these environment variables can be parsed.
+For an application to connect to a provisioned GemFire cluster in Cloud Foundry, it has to create a GemFire ClientCache which connects to the GemFire locators. The application also has to provide an implementation of AuthInitialize which will send the client credentials to the server. The credentials and the locator information is present in the VCAP_SERVICES environment variable. This repository has five examples of how these environment variables can be parsed.
 
-There are 4 example applications in this repository:
+There are 5 example applications in this repository:
 - Java main application
 - Java main application using spring cloud connectors
 - Spring boot application using spring cloud connectors
 - Spring boot application using spring cloud connectors with custom GemFire client configuration
+- Spring boot application using spring cloud connectors and GemfireRepository
 
 Following are the common steps for all examples to create a GemFire Service and create a Region:
 - create a GemFire service instance named "service0"
@@ -58,3 +59,11 @@ If you use Spring, you can just `Autowire` ClientCache into your application.
 application name: `spring-app-client-config`
 
 If the ClientCache requires additional configuration then the Cache needs to be explictly created using a `ServiceConnectorConfig`. The application needs to create a `CacheClient` bean using the CloudFactory.
+
+## Spring Application using Spring GemfireRepository
+
+application name: `gemfire-spring-pizza-store`
+
+This is a GemFire Spring client application which uses GemfireRepository class to access a GemFire cluster. The application assumes that a GemFire cluster exists and contains a region named __Pizza__. Please see instructions above on how to create a GemFire cluster.
+
+To create a Region on the GemFire servers, connect to the cluster using `gfsh` and enter the command `create region --name=Pizza --type=PARTITION`. Once you have the region created, please deploy the App using `cf push`. The application registers a http endpoint `/healthcheck` which inserts and reads a Pizza object from the GemFire cluster.
