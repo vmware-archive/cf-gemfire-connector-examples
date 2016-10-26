@@ -67,3 +67,7 @@ application name: `gemfire-spring-pizza-store`
 This is a GemFire Spring client application which uses GemfireRepository class to access a GemFire cluster. The application assumes that a GemFire cluster exists and contains a region named __Pizza__. Please see instructions above on how to create a GemFire cluster.
 
 To create a Region on the GemFire servers, connect to the cluster using `gfsh` and enter the command `create region --name=Pizza --type=PARTITION`. Once you have the region created, please deploy the App using `cf push`. The application registers a http endpoint `/healthcheck` which inserts and reads a Pizza object from the GemFire cluster.
+To test this application using CUPS(CloudFoundry User Provided Services) you need to follow the steps below
+
+1. Create CUPS service using cf cli `cf cups service0 -p '{"username": "", "password": "", "locators": ["10.244.0.3[55221]", "10.244.0.4[55221]"]}'`
+2. Deploy the application on CF using `cf push`.

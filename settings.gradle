@@ -1,1 +1,1 @@
-include "java-app", "java-app-spring-cloud", "spring-app", "spring-app-client-config"
+include "java-app", "java-app-spring-cloud", "spring-app", "spring-app-client-config", "gemfire-spring-pizza-store"
