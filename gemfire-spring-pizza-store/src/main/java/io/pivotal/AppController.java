@@ -24,6 +24,15 @@ public class AppController {
     @Autowired
     private GemfireRepository<Pizza, String> repository;
 
+    @RequestMapping("/get")
+    public ResponseEntity<Pizza> getPizza() {
+        Pizza found = repository.findOne("plain");
+        if (!found.toppings.contains("cheese") || !found.toppings.contains("sauce")) {
+            return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok().body(found);
+    }
+
     @RequestMapping("/healthcheck")
     public ResponseEntity<Object> healthCheck() {
         LogWriter logger = gemfireCache.getLogger();

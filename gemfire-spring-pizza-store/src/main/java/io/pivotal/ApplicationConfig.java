@@ -40,8 +40,7 @@ public class ApplicationConfig extends AbstractCloudConfig {
         Cloud cloud = cloudFactory.getCloud();
 
         // Let Spring Cloud create a service connector for you.
-        ClientCache cache = cloud.getServiceConnector("service0", ClientCache.class,
-                createGemfireConnectorConfig());
+        ClientCache cache = cloud.getSingletonServiceConnector(ClientCache.class, createGemfireConnectorConfig());
 
         return cache;
     }
@@ -56,6 +55,4 @@ public class ApplicationConfig extends AbstractCloudConfig {
         pizzaRegion.setLookupEnabled(true);
         return pizzaRegion;
     }
-
-
 }

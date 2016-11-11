@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Set;
 
 @Region("Pizza")
@@ -21,6 +22,14 @@ public class Pizza implements Serializable {
      * Default Constructor for Serialization
      */
     public Pizza() {
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public ArrayList<String> getToppings() {
+        return new ArrayList<>(this.toppings);
     }
 
     @Override
