@@ -39,10 +39,9 @@ public class ApplicationConfig extends AbstractCloudConfig {
         // service connectors.
         Cloud cloud = cloudFactory.getCloud();
 
-        // Let Spring Cloud create a service connector for you.
-        ClientCache cache = cloud.getServiceConnector("service0", ClientCache.class,
-                createGemfireConnectorConfig());
-
+        // Let Spring Cloud create a service connector for you. Assuming that only a single service is bound to
+        // the application and that it is a Gemfire service.
+        ClientCache cache = cloud.getSingletonServiceConnector(ClientCache.class, createGemfireConnectorConfig());
         return cache;
     }
 
