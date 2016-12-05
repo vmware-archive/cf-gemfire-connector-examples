@@ -9,6 +9,15 @@ import java.util.Set;
 @Region("Pizza")
 public class Pizza implements Serializable {
     private static final long serialVersionUID = 42L;
+
+    public String getName() {
+        return name;
+    }
+
+    public Set getToppings() {
+        return toppings;
+    }
+
     @Id String name;
     Set toppings;
 

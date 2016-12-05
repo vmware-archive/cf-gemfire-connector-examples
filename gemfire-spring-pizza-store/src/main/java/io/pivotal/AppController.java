@@ -44,4 +44,12 @@ public class AppController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping("/pizza")
+    public Pizza getPizza() {
+        LogWriter logger = gemfireCache.getLogger();
+
+        Pizza found = repository.findOne("plain");
+        return found;
+    }
 }
