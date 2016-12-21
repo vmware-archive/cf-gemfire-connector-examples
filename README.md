@@ -16,8 +16,9 @@ Following are the common steps for all examples to create a GemFire Service and 
   `cf create-service p-gemfire GemFireServicePlan1 service0`
 - install the gemfire plugin for the `cf` command
 - create a region named "test"
-  - connect `gfsh` to the service instance
-    `cf show-gfsh service0` will print the command to run in gfsh to connect to the cluster (install GemFire cf plugin from [Pivotal Network](http://network.pivotal.io)
+  - create a service key using `cf create-service-key service0 my-key`
+  - get the locator ip and port by viewing the service key `cf service-key service0 my-key`
+  - connect `gfsh` to the service using the locator address obtained from viewing the service key `gfsh> connect --locator=<locator-ip>[<locator-port>]`
   - `gfsh>create region --name=test --type=PARTITION` will create a region named "test"
 
 Clone this repo, then build all examples with:
