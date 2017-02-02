@@ -8,16 +8,6 @@ import java.util.Set;
 
 @Region("Pizza")
 public class Pizza implements Serializable {
-    private static final long serialVersionUID = 42L;
-
-    public String getName() {
-        return name;
-    }
-
-    public Set getToppings() {
-        return toppings;
-    }
-
     @Id
     String name;
     Set toppings;
@@ -27,25 +17,15 @@ public class Pizza implements Serializable {
         this.toppings = toppings;
     }
 
-    /**
-     * Default Constructor for Serialization
-     */
+    @SuppressWarnings("unused") // required for PDX serialization
     public Pizza() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pizza)) return false;
-
-        Pizza pizza = (Pizza) o;
-
-        return name.equals(pizza.name);
-
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public int hashCode() {
-        return name.hashCode();
+    public Set getToppings() {
+        return toppings;
     }
 }

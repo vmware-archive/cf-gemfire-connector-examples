@@ -4,6 +4,7 @@ package io.pivotal;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.client.ClientCacheFactory;
 import org.apache.geode.cache.client.ClientRegionShortcut;
+import org.apache.geode.pdx.ReflectionBasedAutoSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
@@ -37,6 +38,7 @@ public class ApplicationConfig extends AbstractCloudConfig {
         factory.set(SECURITY_CLIENT, "io.pivotal.UserAuthInitialize.create");
         factory.set(SECURITY_USERNAME, serviceInfo.getUsername());
         factory.set(SECURITY_PASSWORD, serviceInfo.getPassword());
+        factory.setPdxSerializer(new ReflectionBasedAutoSerializer("io.pivotal.Pizza"));
 
         return factory.create();
     }
