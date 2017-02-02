@@ -1,10 +1,10 @@
 package io.pivotal;
 
-import com.gemstone.gemfire.LogWriter;
-import com.gemstone.gemfire.cache.client.ClientCache;
+
+import org.apache.geode.LogWriter;
+import org.apache.geode.cache.client.ClientCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.data.gemfire.repository.GemfireRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class AppController {
     private ClientCache gemfireCache;
 
     @Autowired
-    private GemfireRepository<Pizza, String> repository;
+    private PizzaRepository repository;
 
     @RequestMapping("/healthcheck")
     public ResponseEntity<Object> healthCheck() {
@@ -36,7 +36,7 @@ public class AppController {
         logger.info("Finished inserting the element");
 
         Pizza found = repository.findOne("plain");
-        if(found == null) {
+        if (found == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         if (!found.toppings.contains("cheese") || !found.toppings.contains("sauce")) {
@@ -47,8 +47,6 @@ public class AppController {
 
     @RequestMapping("/pizza")
     public Pizza getPizza() {
-        LogWriter logger = gemfireCache.getLogger();
-
         Pizza found = repository.findOne("plain");
         return found;
     }

@@ -45,7 +45,7 @@ dependencies {
         exclude module: "spring-data-gemfire"
     }
 
-	compile("org.springframework.data:spring-data-geode:1.0.0.APACHE-GEODE-INCUBATING-M3")
+	compile("org.springframework.data:spring-data-geode:1.0.0.INCUBATING-RELEASE")
     compile("io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:1.0.0.RELEASE")
     compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:1.0.0.RELEASE")
 	testCompile('org.springframework.boot:spring-boot-starter-test')

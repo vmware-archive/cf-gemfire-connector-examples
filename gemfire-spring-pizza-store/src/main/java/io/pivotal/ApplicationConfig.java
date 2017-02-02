@@ -1,48 +1,44 @@
 package io.pivotal;
 
-import com.gemstone.gemfire.cache.client.ClientCache;
-import com.gemstone.gemfire.cache.client.ClientRegionShortcut;
-import io.pivotal.spring.cloud.service.gemfire.GemfireServiceConnectorConfig;
+
+import org.apache.geode.cache.client.ClientCache;
+import org.apache.geode.cache.client.ClientCacheFactory;
+import org.apache.geode.cache.client.ClientRegionShortcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
 import org.springframework.cloud.config.java.AbstractCloudConfig;
-import org.springframework.cloud.service.ServiceConnectorConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.gemfire.client.ClientRegionFactoryBean;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
+
+import java.net.URI;
 
 
 @Configuration
 @EnableGemfireRepositories
 public class ApplicationConfig extends AbstractCloudConfig {
 
-    public ServiceConnectorConfig createGemfireConnectorConfig() {
-        // Create a custom service connector config object which sets specific properties
-        // for the ClientCache as exposed by the GemfireServiceConnectorConfig.
-        GemfireServiceConnectorConfig gemfireConfig = new GemfireServiceConnectorConfig();
-        gemfireConfig.setPoolIdleTimeout(7777L);
+    private static final String SECURITY_CLIENT = "security-client-auth-init";
+    private static final String SECURITY_USERNAME = "security-username";
+    private static final String SECURITY_PASSWORD = "security-password";
 
-        return gemfireConfig;
-    }
+    @Bean
+    public ClientCache gemfireCache() {
+        Cloud cloud = new CloudFactory().getCloud();
+        ServiceInfo serviceInfo = (ServiceInfo) cloud.getServiceInfos().get(0);
 
-    @Bean(name = "gemfireCache")
-    public ClientCache getGemfireClientCache() {
-        CloudFactory cloudFactory = new CloudFactory();
+        ClientCacheFactory factory = new ClientCacheFactory();
+        for (URI locator : serviceInfo.getLocators()) {
+            factory.addPoolLocator(locator.getHost(), locator.getPort());
+        }
 
-        // Obtain the Cloud object for the environment in which the application is running.
-        // Note that you must have a CloudConnector suitable for your deployment environment on your classpath.
-        // For example, if you are deploying the application to Cloud Foundry, you must add the Cloud Foundry
-        // Connector to your classpath. If no suitable CloudConnector is found, the getCloud() method will throw
-        // a CloudException. Use the Cloud instance to access application and service information and to create
-        // service connectors.
-        Cloud cloud = cloudFactory.getCloud();
+        factory.set(SECURITY_CLIENT, "io.pivotal.UserAuthInitialize.create");
+        factory.set(SECURITY_USERNAME, serviceInfo.getUsername());
+        factory.set(SECURITY_PASSWORD, serviceInfo.getPassword());
 
-        // Let Spring Cloud create a service connector for you. Assuming that only a single service is bound to
-        // the application and that it is a Gemfire service.
-        ClientCache cache = cloud.getSingletonServiceConnector(ClientCache.class, createGemfireConnectorConfig());
-        return cache;
+        return factory.create();
     }
 
     @Bean(name = "Pizza")
@@ -55,6 +51,4 @@ public class ApplicationConfig extends AbstractCloudConfig {
         pizzaRegion.setLookupEnabled(true);
         return pizzaRegion;
     }
-
-
 }

@@ -18,7 +18,8 @@ public class Pizza implements Serializable {
         return toppings;
     }
 
-    @Id String name;
+    @Id
+    String name;
     Set toppings;
 
     public Pizza(String name, Set toppings) {
