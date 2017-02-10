@@ -1,6 +1,6 @@
 plugins {
   id 'java'
-  id 'com.github.johnrengelman.shadow' version '1.2.2'
+  id 'com.github.johnrengelman.shadow' version '1.2.4'
 }
 
 group 'io.pivotal'
@@ -28,6 +28,9 @@ shadowJar {
 }
 
 dependencies {
-    compile("com.gemstone.gemfire:gemfire:8.2.1")
+    compile("com.gemstone.gemfire:gemfire:9.0.1")
+    compile("io.dropwizard.metrics:metrics-core:3.1.0")
+    compile("org.coursera:dropwizard-metrics-datadog:1.1.6")
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
