@@ -56,7 +56,7 @@ public class ServiceInfo extends BaseServiceInfo {
         for (Map<String, String> map : users) {
             User user = new User(map);
 
-            if (user.isOperator()) {
+            if (user.isClusterOperator()) {
                 this.user = user;
                 break;
             }

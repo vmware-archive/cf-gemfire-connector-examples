@@ -11,8 +11,8 @@ public class User {
         password = map.get("password");
     }
 
-    public boolean isOperator() {
-        return username != null && username.equals("operator");
+    public boolean isClusterOperator() {
+        return username != null && username.equals("cluster_operator");
     }
 
     public String getPassword() {
