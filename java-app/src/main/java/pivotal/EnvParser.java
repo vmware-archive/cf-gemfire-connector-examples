@@ -77,7 +77,7 @@ public class EnvParser {
   }
 
   private List getGemFireService(Map services) {
-    List l = (List) services.get("p-gemfire");
+    List l = (List) services.get("p-cloudcache");
     if (l == null) {
       throw new IllegalStateException("GemFire service is not bound to this application");
     }

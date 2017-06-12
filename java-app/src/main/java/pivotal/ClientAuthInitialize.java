@@ -32,6 +32,7 @@ public class ClientAuthInitialize implements AuthInitialize {
     try {
       String username = env.getUsername();
       String password = env.getPasssword();
+      System.out.println("username: " + username + "\tpassword: " + password);
       props.put(USER_NAME, username);
       props.put(PASSWORD, password);
     } catch (IOException e) {
