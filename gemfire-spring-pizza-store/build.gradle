@@ -45,8 +45,14 @@ dependencies {
         exclude module: "spring-data-gemfire"
     }
 
+	compile("org.springframework.cloud:spring-cloud-spring-service-connector:1.2.3.RELEASE")
+
 	compile("org.springframework.data:spring-data-geode:1.0.0.INCUBATING-RELEASE")
-    compile("io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:1.0.0.RELEASE")
-    compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:1.0.0.RELEASE")
+
+	compile("org.springframework.cloud:spring-cloud-core:1.2.3.RELEASE")
+	compile files('/Users/pivotal/workspace/spring-cloud-gemfire-connector/spring-cloud-gemfire-connector-core/build/libs/spring-cloud-gemfire-connector-core-1.1.0.RELEASE.jar')
+	compile files('/Users/pivotal/workspace/spring-cloud-gemfire-connector/spring-cloud-gemfire-cloudfoundry-connector/build/libs/spring-cloud-gemfire-cloudfoundry-connector-1.1.0.RELEASE.jar')
+	compile("org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.3.RELEASE")
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

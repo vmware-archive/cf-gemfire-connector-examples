@@ -1,6 +1,7 @@
 package io.pivotal;
 
 
+import io.pivotal.spring.cloud.service.common.GemfireServiceInfo;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.client.ClientCacheFactory;
 import org.apache.geode.cache.client.ClientRegionShortcut;
@@ -28,7 +29,7 @@ public class ApplicationConfig extends AbstractCloudConfig {
     @Bean
     public ClientCache gemfireCache() {
         Cloud cloud = new CloudFactory().getCloud();
-        ServiceInfo serviceInfo = (ServiceInfo) cloud.getServiceInfos().get(0);
+        GemfireServiceInfo serviceInfo = (GemfireServiceInfo) cloud.getServiceInfos().get(0);
 
         ClientCacheFactory factory = new ClientCacheFactory();
         for (URI locator : serviceInfo.getLocators()) {
@@ -36,8 +37,8 @@ public class ApplicationConfig extends AbstractCloudConfig {
         }
 
         factory.set(SECURITY_CLIENT, "io.pivotal.UserAuthInitialize.create");
-        factory.set(SECURITY_USERNAME, serviceInfo.getUsername());
-        factory.set(SECURITY_PASSWORD, serviceInfo.getPassword());
+        factory.set(SECURITY_USERNAME, serviceInfo.getDevUsername());
+        factory.set(SECURITY_PASSWORD, serviceInfo.getDevPassword());
         factory.setPdxSerializer(new ReflectionBasedAutoSerializer("io.pivotal.Pizza"));
 
         return factory.create();

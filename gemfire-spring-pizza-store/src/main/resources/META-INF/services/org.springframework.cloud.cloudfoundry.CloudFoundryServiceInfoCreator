@@ -1,1 +1,1 @@
-io.pivotal.ServiceInfoCreator
+io.pivotal.spring.cloud.cloudfoundry.GemfireServiceInfoCreator
