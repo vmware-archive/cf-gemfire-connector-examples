@@ -10,13 +10,6 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
 
-idea{
-    module{
-        downloadSources = true
-        downloadJavadoc = true
-    }
-}
-
 sourceCompatibility = 1.7
 
 mainClassName = "pivotal.MyJavaApplication"

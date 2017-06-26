@@ -2,32 +2,23 @@ package io.pivotal;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Region("Pizza")
-public class Pizza {
+public class Pizza implements Serializable {
     @Id
     String name;
     Set toppings;
-    String sauce;
 
-    public Pizza(String name, Set toppings, String sauce) {
+    public Pizza(String name, Set toppings) {
         this.name = name;
         this.toppings = toppings;
-        this.sauce = sauce;
     }
 
+    @SuppressWarnings("unused") // required for PDX serialization
     public Pizza() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "Pizza{" +
-                "name='" + name + '\'' +
-                ", toppings=" + toppings +
-                ", sauce='" + sauce + '\'' +
-                '}';
     }
 
     public String getName() {
@@ -36,9 +27,5 @@ public class Pizza {
 
     public Set getToppings() {
         return toppings;
-    }
-
-    public String getSauce() {
-        return sauce;
     }
 }
