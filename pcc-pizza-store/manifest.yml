@@ -1,0 +1,6 @@
+---
+applications:
+- name: pcc-pizza
+  path:  build/libs/PCC-Pizza-0.0.1-SNAPSHOT.jar
+  services:
+  - gf0
