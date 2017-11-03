@@ -1,7 +1,0 @@
----
-applications:
-- name: gemfire-spring-pizza-store
-  path: build/libs/gemfire-spring-pizza-store-0.0.1-SNAPSHOT.jar
-  buildpack: java_buildpack
-  services:
-  - service0
